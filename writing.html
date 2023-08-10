@@ -70,6 +70,22 @@
 
 
 <script>
+
+// ページが読み込まれた際にローカルストレージから値を取得して表示
+window.onload = function() {
+    var title = document.getElementById("input_title");
+    var textarea = document.getElementById("input_teatarea");
+    // ローカルストレージから値を取得して表示
+    var storedTitle = localStorage.getItem("savedTitle");
+    var storedComment = localStorage.getItem("savedComment");
+    if (storedTitle) {
+        title.value = storedTitle;
+    }
+    if (storedComment) {
+        textarea.value = storedComment;
+    }
+}
+
 // jsのタグ追加を元に戻す
 var previousState;
 function saveState() {
@@ -151,7 +167,7 @@ function color_set() {
     textarea.setSelectionRange(startPos, endPos + 7);
 }
 
-// htmlタグを文章中から除去して出力
+// htmlタグを文章中から除去して出力し、同時にローカルストレージに内容を保存
 function output_btn() {
     var titleInput = document.getElementById("input_title");
     var commentInput = document.getElementById("input_teatarea");
@@ -167,6 +183,10 @@ function output_btn() {
     // 文字数カウント用にhtmlコードや改行コードを削除
     var commentValueNoHtml = commentValue.replace(/(<([^>]+)>|\n)/ig, "");
 
+    // ローカルストレージに値を保存
+    localStorage.setItem("savedTitle", titleValue);
+    localStorage.setItem("savedComment", commentValue);
+    
     // 出力
     titleOutput.innerHTML = titleValue;
     commentOutput.innerHTML = commentValue;
@@ -235,6 +255,10 @@ function dl_news() {
     downloadLink.download = day + "_"  + outputTitle + ".txt"; // yy-mm-dd_タイトル.txtのファイル名で保存
     downloadLink.href = window.URL.createObjectURL(blob);
     downloadLink.click();
+
+    // ローカルストレージから保存された値を削除
+    localStorage.removeItem("savedTitle");
+    localStorage.removeItem("savedComment");
 }
 </script>
 
