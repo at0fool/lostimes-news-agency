@@ -176,16 +176,17 @@ function output_btn() {
     var outputCount = document.getElementById("output_count");
     var titleValue = titleInput.value.trim();
     var commentValue = commentInput.value.trim();
+
+    // ローカルストレージに値を保存
+    localStorage.setItem("savedTitle", titleValue);
+    localStorage.setItem("savedComment", commentValue);
+  
     // 変換前に存在していた改行コード（\n）の削除
     commentValue = commentValue.replace(/\n/g, '');
     // brかpの閉じタグがあれば\nの改行コードを追加
     commentValue = commentValue.replace(/(<br>|<\/br>|<br \/>|<\/p>)/g, "$&\n");
     // 文字数カウント用にhtmlコードや改行コードを削除
     var commentValueNoHtml = commentValue.replace(/(<([^>]+)>|\n)/ig, "");
-
-    // ローカルストレージに値を保存
-    localStorage.setItem("savedTitle", titleValue);
-    localStorage.setItem("savedComment", commentValue);
     
     // 出力
     titleOutput.innerHTML = titleValue;
