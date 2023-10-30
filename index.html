@@ -1,29 +1,194 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>ロスタイムズ情報局</title>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex,nofollow,noarchive" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css">
 </head>
-
 <body>
-<iframe src="include/header.html" width:"100"></iframe>
-  
-<h1>ロスタイムズ情報局</h1>
 
-<h2>Links</h2>
-<a href="writing.html"><p>執筆支援ツール</p></a>
+<div id="header">
+    <div class="header_contents">
+        <div class="logo_area">
+            <img class="logo_header" src="img/logo2.png" />
+        </div>
+        <div class="header_links">
+            <a href="#HOME">HOME</a>
+            <a href="#ABOUT">ABOUT</a>
+            <a href="#NEWS">NEWS</a>
+            <a href="#CONTACT">CONTACT</a>
+            <a href="#RECRUIT">RECRUIT</a>
+        </div>
+    </div>
+</div>
 
-<h3>メンバー</h3>
-<p>紫月零矢</p>
-<p>笹暮まとも</p>
-<p>由良川灑</p>
-<p>熱海魚</p>
-<p>えふ山F子</p>
-<p>ジャック・ルイス</p>
-<p>羽根野いずむ</p>
-<p>ハロ・ウィン</p>
-<p>心ないジョン</p>
+
+<div id="contents">
+    <div class="member_list">
+	<p>局長：紫月零矢</p>
+	<p>副局長：由良川灑</p>
+	<p>笹暮まとも</p>
+	<p>熱海 魚</p>
+	<p>羽根野いずむ</p>
+	<p>ジャック・ルイス</p>
+	<p>ハロ ウィン</p>
+    </div>
+    <div class="links">
+      <a href="writing.html">執筆支援ツール</a>
+    </div>
+
+</div>
+
+
+<div id="footer">
+    <div class="footer_logo_area">
+        <div class="border_footer"></div>
+        <a href="/">
+            <img src="img/logo_normal.png" alt="ロゴ_ロスタイムズ情報局" class="logo_footer">
+        </a>
+        <div class="border_footer"></div>
+    </div>
+    <div class="footer_link_area">
+        <div class="footer_links">
+            <a href="HOME">HOME</a>
+            <div class="footer_separator">/</div>
+            <a href="ABOUT">ABOUT</a>
+            <div class="footer_separator">/</div>
+            <a href="NEWS">NEWS</a>
+            <div class="footer_separator">/</div>
+            <a href="CONTACT">CONTACT</a>
+            <div class="footer_separator">/</div>
+            <a href="RECRUIT">RECRUIT</a>
+            <div class="footer_separator">/</div>
+        </div>
+        <div class="footer_links">
+            <a href="STGR">STGR</a>
+            <div class="footer_separator">/</div>
+            <a href="FV PATRON">FV PATRON</a>
+            <div class="footer_separator">/</div>
+            <a href="FV WIKI">FV WIKI</a>
+            <div class="footer_separator">/</div>
+            <a href="LTN WIKI">LTN WIKI</a>
+            <div class="footer_separator">/</div>
+        </div>
+    </div>
+    <div class="footer_end_area">
+        <div class="footer_name">© 2023 ロスタイムズ情報局 / LosTimesNewsAgency</div>
+    </div>
+</div>
+
 </body>
-</html>
+
+<style>
+html{
+font-family: serif;
+font-weight: bold;
+}
+
+body{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* contents */
+#contents{
+    margin-top: 25px;
+}
+
+.member_list{
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    gap: 6px;
+}
+
+.links{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.links a{
+    text-decoration: underline;
+    color: #094e8b;
+}
+
+.links a:hover{
+    color: #4686c0; 
+}
+
+
+/* header */
+#header{
+    padding: 10px 20px;
+    background-color: #fff;
+    height: 75px;
+    box-shadow: 0px 0px 3px 0px #4f4f4f;
+}
+
+.header_contents{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    height: 100%;
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.header_links{
+    align-self: center;
+    font-size: 20px;
+    display: flex;
+    gap: 28px;
+}
+
+.logo_header{
+    height: 100%;
+}
+
+
+
+/* footer */
+.footer_logo_area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.border_footer {
+    border-bottom: 3px solid #b2b2b2;
+    flex-grow: 1;
+}
+
+.logo_footer {
+    max-width: 180px;
+    width: 160px;
+    padding-bottom: 10px;
+    object-fit: cover;
+}
+
+.footer_link_area{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    margin-top: -18px;
+    margin-bottom: 6px;
+}
+
+.footer_links{
+    display: flex;
+    gap: 7px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer_name{
+    background-color: #dc143c;
+    color: #fff;
+    padding: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+</style>
