@@ -54,19 +54,48 @@
 /* 960px～1279px 中型ディスプレイ
 ------------------------------ */
 @media screen and (min-width: 960px) and (max-width: 1279px) {
+    .footer_links{
+        font-size: 16px;
+	gap: 6px;
+    }
+
 }
 
 /* 600px〜959px：タブレット
 ------------------------------ */
 @media screen and (min-width: 600px) and (max-width: 959px) {
+    .footer_links{
+        font-size: 16px;
+        gap: 6px;
+    }
 }
 
 /* 480px～599px 小型タブレット
 ------------------------------ */
 @media screen and (min-width: 480px) and (max-width: 599px) {
+    .footer_links{
+        font-size: 12px;
+        gap: 6px;
+    }
+    .footer_name{
+       font-size: 10px;
+   }
+   .logo_footer{
+      max-width: 110px;
+   }
 }
 
 /* 0px～479px スマートフォン
 ------------------------------ */
 @media screen and (max-width: 479px) {
+    .footer_links{
+        font-size: 12px;
+        gap: 6px;
+    }
+    .footer_name{
+       font-size: 10px;
+   }
+   .logo_footer{
+      max-width: 110px;
+   }
 }
