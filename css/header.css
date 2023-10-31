@@ -1,9 +1,19 @@
+/*
+ * レスポンシブ
+ * 1280px～ PC (default)
+ * 960px～1279px 中型ディスプレイ
+ * 600px～959px タブレット
+ * 480px～599px 小型タブレット
+ * 0px～479px スマートフォン
+ * */
+
 /* header */
 #header{
     padding: 10px 20px;
     background-color: #fff;
     height: 75px;
     box-shadow: 0px 0px 3px 0px #4f4f4f;
+    position: relative;
 }
 
 .header_contents{
@@ -22,7 +32,81 @@
     gap: 28px;
 }
 
+.header_links2{
+    display: none;
+}
+
 .logo_header{
     height: 100%;
 }
 
+
+/* 960px～1279px 中型ディスプレイ
+------------------------------ */
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+    #header{
+        height:70px;
+    }
+
+    .header_contents{
+        width: 920px;
+    }
+}
+
+/* 600px〜959px：タブレット
+------------------------------ */
+@media screen and (min-width: 600px) and (max-width: 959px) {
+    #header{
+        height:65px;
+    }
+
+    .header_contents{
+        width: 100%;
+    }
+
+    .header_links{
+        font-size:16px;
+	gap: 15px;
+    }
+
+}
+
+/* 480px～599px 小型タブレット
+------------------------------ */
+@media screen and (min-width: 480px) and (max-width: 599px) {
+    #header{
+        height:55px;
+    }
+
+    .header_contents{
+        width: 100%;
+    }
+
+    .header_links{
+        display: none;
+    }
+
+    .header_links2{
+        display: block;
+    }
+
+}
+/* 0px～479px スマートフォン
+------------------------------ */
+@media screen and (max-width: 479px) {
+    #header{
+        height: 55px;
+    }
+    
+    .header_contents{
+        width: 100%;
+    }
+
+    .header_links{
+        display: none;
+    }
+
+    .header_links2{
+        display: block;
+    }
+}

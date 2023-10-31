@@ -1,3 +1,12 @@
+/*
+ * レスポンシブ
+ * 1280px～ PC (default)
+ * 960px～1279px 中型ディスプレイ
+ * 600px～959px タブレット
+ * 480px～599px 小型タブレット
+ * 0px～479px スマートフォン
+ * */
+
 /* contents */
 /* 共通 */
 #contents{
@@ -25,4 +34,25 @@
 
 .links a:hover{
     color: #4686c0;
-                         
+}
+
+
+/* 960px～1279px 中型ディスプレイ
+------------------------------ */
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+}
+
+/* 600px〜959px：タブレット
+------------------------------ */
+@media screen and (min-width: 600px) and (max-width: 959px) {
+}
+
+/* 480px～599px 小型タブレット
+------------------------------ */
+@media screen and (min-width: 480px) and (max-width: 599px) {
+}
+
+/* 0px～479px スマートフォン
+------------------------------ */
+@media screen and (max-width: 479px) {
+}
