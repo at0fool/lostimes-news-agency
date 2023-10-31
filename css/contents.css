@@ -1,0 +1,28 @@
+/* contents */
+/* 共通 */
+#contents{
+    margin-top: 25px;
+}
+
+/* テスト用メンバーリスト */
+.member_list{
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    gap: 6px;
+}
+
+.links{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.links a{
+    text-decoration: underline;
+    color: #094e8b;
+}
+
+.links a:hover{
+    color: #4686c0;
+                         
