@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>ロスタイムズ情報局</title>
+    <script src="js/layout.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css">
     <link rel="stylesheet" type="text/css" href="css/contents.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -28,25 +29,3 @@
   <footer></footer>
 </body>
 </html>
-
-<script>
-    // ファイルを読み込む関数
-    function include(file, elementTagName) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', file, true);
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var elements = document.getElementsByTagName(elementTagName);
-          if (elements.length > 0) {
-            elements[0].innerHTML = xhr.responseText;
-          }
-        }
-      };
-      xhr.send();
-    }
-
-    // ヘッダーとフッターを読み込む
-    include('include/header.html', 'header');
-    include('include/footer.html', 'footer');
-</script>
-
