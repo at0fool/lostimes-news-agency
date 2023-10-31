@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css">
 </head>
 <body>
   <div id="header"></div>
@@ -25,24 +25,23 @@
 </html>
 
 <script>
-  // ファイルを読み込む関数
-  function include(file, elementId) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', file, true);
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var element = document.getElementById(elementId);
-        if (element) {
-          element.innerHTML = xhr.responseText;
+    // ファイルを読み込む関数
+    function include(file, elementTagName) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', file, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var elements = document.getElementsByTagName(elementTagName);
+          if (elements.length > 0) {
+            elements[0].innerHTML = xhr.responseText;
+          }
         }
-      }
-    };
-    xhr.send();
-  }
+      };
+      xhr.send();
+    }
 
-  // ヘッダー、フッター、その他のファイルを読み込む
-  include('include/head.html', 'head');
-  include('include/header.html', 'header');
-  include('include/footer.html', 'footer');
+    // ヘッダーとフッターを読み込む
+    include('include/header.html', 'header');
+    include('include/footer.html', 'footer');
 </script>
 
