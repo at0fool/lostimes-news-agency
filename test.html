@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+  <div id="header"></div>
+  <div id="contents">
+      <div class="member_list">
+         <p>局長：紫月零矢</p>
+         <p>副局長：由良川灑</p>
+         <p>笹暮まとも</p>
+         <p>熱海 魚</p>
+         <p>羽根野いずむ</p>
+         <p>ジャック・ルイス</p>
+         <p>ハロ ウィン</p>
+      </div>
+      <div class="links">
+          <a href="writing.html">執筆支援ツール</a>
+      </div>
+  </div>
+  <div id="footer"></div>
+</body>
+
+</html>
+
+<script>
+  // ファイルを読み込む関数
+  function include(file, elementId) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', file, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var element = document.getElementById(elementId);
+        if (element) {
+          element.innerHTML = xhr.responseText;
+        }
+      }
+    };
+    xhr.send();
+  }
+
+  // ヘッダー、フッター、その他のファイルを読み込む
+  include('include/head.html', 'head');
+  include('include/header.html', 'header');
+  include('include/footer.html', 'footer');
+</script>
+
