@@ -89,7 +89,7 @@
 ------------------------------ */
 @media screen and (max-width: 479px) {
     .footer_links{
-        font-size: 10px;
+        font-size: 12px;
         gap: 6px;
     }
     .footer_name{
