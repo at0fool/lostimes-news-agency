@@ -95,8 +95,12 @@ window.onload = function() {
     var month = String(today.getMonth() + 1).padStart(2, '0'); // 月を2桁に整形
     var day = String(today.getDate()).padStart(2, '0'); // 日を2桁に整形
 
+    var hour = String(today.getHours()).padStart(2, '0'); // 時間を2桁に整形
+    var min = String(today.getMinutes()).padStart(2, '0'); // 分を2桁に整形
+    var time = hour + ":" + min;
+
     // 日付を指定された形式に整形
-    var formattedDate = '<font color=#949494>' + year + '/' + month + '/' + day + '</font>';
+    var formattedDate = '<font color=#949494>' + year + '/' + month + '/' + day + " " + time + '</font>';
 
     // HTML要素に日付を挿入
     var dateElement = document.querySelector(".date_html");
