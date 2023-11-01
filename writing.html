@@ -2,11 +2,15 @@
 <!-- ロスサントスでNEWSアプリを更新する際に、少しだけ執筆を楽にするツール
 何か不具合や要望等があれば ふーる / 紫月零矢（@at_fool_trpg） まで 
 更新　2023-08-10 11:40-->
-<html>
+<html lang="ja">
 <head>
-  <title>ロスタイムズ情報局|執筆支援ツール</title>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/favicon.ico" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png">  
+    <title>ロスタイムズ情報局|執筆支援ツール</title>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex,nofollow,noarchive" >
 </head>
 <body>
     <h1><span style="background-color: #dc143c;color: white;padding: 0 10px;">NEWS</span> 執筆支援ツール</h1>
@@ -68,7 +72,7 @@
         </div>
     </div>
 </body>
-
+<div class="date_html" onclick="data_insert"></div>
 
 <script>
 
@@ -85,6 +89,19 @@ window.onload = function() {
     if (storedComment) {
         textarea.value = storedComment;
     }
+    //日付
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = String(today.getMonth() + 1).padStart(2, '0'); // 月を2桁に整形
+    var day = String(today.getDate()).padStart(2, '0'); // 日を2桁に整形
+
+    // 日付を指定された形式に整形
+    var formattedDate = '<font color=#949494>' + year + '/' + month + '/' + day + '</font>';
+
+    // HTML要素に日付を挿入
+    var dateElement = document.querySelector(".date_html");
+    dateElement.textContent = formattedDate;
+
 }
 
 // jsのタグ追加を元に戻す
@@ -129,10 +146,10 @@ function br_set() {
     textarea.focus();
 }
 
-
 function b_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
+    var scrollTop = textarea.scrollTop; // 1. 現在のスクロール位置を保存
     var startPos = textarea.selectionStart;
     var endPos = textarea.selectionEnd;
     var text = textarea.value;
@@ -140,11 +157,13 @@ function b_set() {
     textarea.value = newText;
     textarea.focus();
     textarea.setSelectionRange(startPos, endPos + 7);
+    textarea.scrollTop = scrollTop; // 2. スクロール位置を復元
 }
 
 function u_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
+    var scrollTop = textarea.scrollTop;
     var startPos = textarea.selectionStart;
     var endPos = textarea.selectionEnd;
     var text = textarea.value;
@@ -152,11 +171,13 @@ function u_set() {
     textarea.value = newText;
     textarea.focus();
     textarea.setSelectionRange(startPos, endPos + 7);
+    textarea.scrollTop = scrollTop;
 }
 
 function color_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
+    var scrollTop = textarea.scrollTop;
     var startPos = textarea.selectionStart;
     var endPos = textarea.selectionEnd;
     var text = textarea.value;
@@ -166,7 +187,10 @@ function color_set() {
     textarea.value = newText;
     textarea.focus();
     textarea.setSelectionRange(startPos, endPos + 7);
+    textarea.scrollTop = scrollTop;
 }
+
+
 
 // htmlタグを文章中から除去して出力し、同時にローカルストレージに内容を保存
 function output_btn() {
