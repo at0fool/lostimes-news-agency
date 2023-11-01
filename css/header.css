@@ -38,9 +38,8 @@
 }
 
 .logo_header{
-    height: 100%;
-    max-width: 125px;
-    width: 100%;
+    height: 50px;
+    width: 136.89px;
 }
 
 /* ハンバーガーメニュー用 */
@@ -156,6 +155,11 @@
     .header_contents{
         width: 920px;
     }
+
+    .logo_header{
+        height: 45px;
+        width: 123.2px;
+    }
 }
 
 /* 600px〜959px：タブレット
@@ -167,6 +171,11 @@
 
     .header_contents{
         width: 100%;
+    }
+
+    .logo_header{
+        height: 45px;
+        width: 123.2px;
     }
 
     .header_links{
@@ -188,6 +197,11 @@
         width: 100%;
     }
 
+    .logo_header{
+        height: 35px;
+        width: 95.83px;
+    }
+
     .header_links{
         display: none;
     }
@@ -207,6 +221,11 @@
     
     .header_contents{
         width: 100%;
+    }
+
+    .logo_header{
+        height: 33px;
+        width: 90px;
     }
 
     .header_links{
