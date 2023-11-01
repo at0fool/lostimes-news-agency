@@ -179,6 +179,7 @@
 @media screen and (min-width: 480px) and (max-width: 599px) {
     #header{
         height:55px;
+        padding: 10px 15px;    
     }
 
     .header_contents{
@@ -199,6 +200,7 @@
 @media screen and (max-width: 479px) {
     #header{
         height: 45px;
+	padding: 6px 10px;
     }
     
     .header_contents{
