@@ -93,13 +93,14 @@
     transition: all 0.5s ease 0s;
     height: 0px;
     position: absolute;
-    top: 55px;
+    top: 57px;
     right: 0;
     width: 115px;
     text-align: center;
     box-shadow: -2px 2px 3px -1px #4F4F4E;
     line-height: 2;
     overflow: hidden;
+    background-color: #fff;
 }
 
 .sp_link_list li{
@@ -215,7 +216,7 @@
     }
 
     .sp_link_list{
-       top: 45px;
+       top: 47px;
     }
     .sp_link_list.is_active{
        height:164px;
