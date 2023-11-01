@@ -10,7 +10,6 @@
 /* contents */
 /* 共通 */
 #contents{
-    margin-top: 25px;
 }
 
 /* テスト用メンバーリスト */
@@ -19,6 +18,7 @@
     display: flex;
     flex-flow: column;
     gap: 6px;
+    margin-top: 25px;
 }
 
 .links{
