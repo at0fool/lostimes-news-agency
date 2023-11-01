@@ -39,6 +39,8 @@
 
 .logo_header{
     height: 100%;
+    max-width: 125px;
+    width: 100%;
 }
 
 /* ハンバーガーメニュー用 */
