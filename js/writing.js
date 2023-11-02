@@ -29,7 +29,10 @@ function restoreState() {
 }
 
 function undo() {
+    var textarea = document.getElementById("input_teatarea");
+    var scrollTop = textarea.scrollTop;
     restoreState();
+    textarea.scrollTop = scrollTop;
 }
 
 // htmlタグを追加する
@@ -127,13 +130,10 @@ function insert_data() {
 
     // テキストエリアの現在の内容を取得
     var currentContent = textarea.value;
-
     // 新しい行を作成し、日付を追加
     var newContent = currentContent + '\n' + formattedDate;
-
     // テキストエリアに新しい内容を設定
     textarea.value = newContent;
-
     // スクロールバーを一番下にスクロール
     textarea.scrollTop = textarea.scrollHeight;
 }
