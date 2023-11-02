@@ -1,0 +1,227 @@
+/*
+ * レスポンシブ
+ * 1280px～ PC (default)
+ * 960px～1279px 中型ディスプレイ
+ * 600px～959px タブレット
+ * 480px～599px 小型タブレット
+ * 0px～479px スマートフォン
+ * */
+
+/* contents */
+/* 共通 */
+
+#writing_tool{
+    font-family: "ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic Pro","メイリオ","Meiryo","MS Pゴシック",sans-serif;
+}
+
+/* CSS */
+body,p,ul,td,th{
+    margin: inherit;
+    padding: inherit;
+}
+
+h1{
+    font-size: 24px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+input:focus,input:active ,input, textarea:focus, textarea:active, textarea{
+    outline: none;
+    border: 1px solid black;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+textarea{
+    resize: vertical;
+}
+
+p,input,textarea{
+    font-size: 16px;
+}
+
+.tools{
+    place-content: center;
+    margin:20px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.contents{
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+textarea, #comment_result{
+    padding: 1px;
+}
+
+.input_news, .output_news{
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
+.title_input, .title_output{
+    display: flex;
+}
+
+.title_input p,.title_output p{
+    background-color: #dc143c;
+    color: white;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    padding: 3px 10px;
+    width: 20%;
+    text-align: center;
+}
+
+#title_result{
+    background-color: transparent;
+    border-right: 1px solid black;
+    background-color: #f0f0f0;
+    color: black;
+    text-align: left;
+    cursor: pointer;
+}
+
+.title_input input, .title_output input, #title_result{
+    width: 80%;
+    padding-left: 5px;
+}
+
+.comment_input textarea, .comment_output textarea, #comment_result{
+    width: 100%;
+    min-height: 300px;
+}
+
+#comment_result{
+    border:1px solid black;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.btn_area{
+    display: flex;
+    margin:10px 0;
+    gap: 5px;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+.color_pick_area{
+    display: flex;
+    gap: 2px;
+}
+.btn{
+    transition: all 0.15s ease;
+    --animation-duration: 0.5s;
+    border-radius: 5px;
+    height: 30px;
+    padding:5px 6px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:active{
+    transform: scale(0.9);
+}
+
+.btn:focus{
+    border-radius: 5px;
+}
+
+.tool_btn:hover{
+    background-color: #a9a9a9;
+    color: white;
+}
+
+#pick_color{
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 1px 3px;
+}
+
+.output_btn_area{
+    text-align: center;
+}
+
+.output_btn, .output_btn:focus{
+    max-width: 200px;
+    width: 100%;
+    background-color: #ff8c00;
+    color: white;
+}
+
+.output_btn:hover, .output_btn:active{
+    background-color: #ffddb6;
+    color: black;
+}
+
+.dl_btn, .dl_btn:focus{
+    max-width: 200px;
+    width: 100%;
+    background-color: #4b99ff;
+    color: white;
+}
+
+.dl_btn:hover, .dl_btn:active{
+    background-color: #c4e9ff;
+    color: black;
+}
+
+
+.output_news input,.output_news textarea{
+    background-color: #f5f5f5;
+}
+
+.tool_tips{
+    width: 100%;
+    max-width: fit-content;
+    margin: 0 5px;
+}
+
+.tool_tips p{
+    font-size: 14px;
+}
+
+/* ヘッダーフッター他コンテンツ準備までの間 */
+.writing_page .header_sp_area, .writing_page .header_links, .writing_page .footer_link_area .links1{
+    display: none;
+}
+
+.writing_page .footer_link_area .links2{
+    margin-bottom: 8px;
+}
+
+
+/* 960px～1279px 中型ディスプレイ
+------------------------------ */
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+}
+
+/* 600px〜959px：タブレット
+------------------------------ */
+@media screen and (min-width: 600px) and (max-width: 959px) {
+}
+
+/* 480px～599px 小型タブレット
+------------------------------ */
+@media screen and (min-width: 480px) and (max-width: 599px) {
+}
+
+/* 0px～479px スマートフォン
+------------------------------ */
+@media screen and (max-width: 479px) {
+}
