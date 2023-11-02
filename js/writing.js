@@ -33,6 +33,16 @@ function undo() {
 }
 
 // htmlタグを追加する
+function all_br_set(){
+    saveState();
+    var textarea = document.getElementById("input_teatarea");
+    var text = textarea.value;
+    var textWithBrTags = text.replace(/\n/g, "<br />\n");
+
+    // テキストエリアに置き換えたテキストを設定
+    textarea.value = textWithBrTags;
+}
+
 function br_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
