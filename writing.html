@@ -1,502 +1,96 @@
 <!DOCTYPE html>
-<!-- ロスサントスでNEWSアプリを更新する際に、少しだけ執筆を楽にするツール
-何か不具合や要望等があれば ふーる / 紫月零矢（@at_fool_trpg） まで 
-更新　2023-11-11 11:40-->
 <html lang="ja">
 <head>
+    <!-- ツールについてのお問い合わせ、要望はふーる/紫月零矢(@at_fool_trpg)までお願いします。 -->
     <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="img/favicon.ico" id="favicon">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png">  
-    <title>ロスタイムズ情報局|執筆支援ツール</title>
-    <meta charset="UTF-8">
-    <meta name="robots" content="noindex,nofollow,noarchive" >
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png">
+    <title>ロスタイムズ情報局 | 執筆支援ツール</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;400;500;600;700;900&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/writing.css">
+    <script src="js/layout.js"></script>
+    <script src="js/common.js"></script>
 </head>
 <body>
-    <h1><span style="background-color: #dc143c;color: white;padding: 0 10px;">NEWS</span> 執筆支援ツール</h1>
-    <div class="tools">
-        <div class="contents">
-            <div class="input_news">
-                <p>【変換前（タグあり）】</p>
-                <div class="title_input">
-                    <p>タイトル</p>
-                    <input type="text" id="input_title" name="title" placeholder="タイトルを入力">
+    <header class="writing_page"></header>
+    <div id="writing_tool">
+        <h1><span style="background-color: #dc143c;color: white;padding: 0 10px;">NEWS</span> 執筆支援ツール</h1>
+        <div class="tools">
+            <div class="contents">
+                <div class="input_news">
+                    <p>【変換前（タグあり）】</p>
+                    <div class="title_input">
+                        <p>タイトル</p>
+                        <input type="text" id="input_title" name="title" placeholder="タイトルを入力">
+                    </div>
+                    <div class="comment_input">
+                        <p>本文<span>（文字数：<span id="input_count"></span>）</span></p>
+                        <textarea id="input_teatarea" placeholder="本文を入力"></textarea>
+                    </div>
                 </div>
-                <div class="comment_input">
-                    <p>本文<span>（文字数：<span id="input_count"></span>）</span></p>
-                    <textarea id="input_teatarea" placeholder="本文を入力"></textarea>
-                </div>
-            </div>
 
-            <div class="btn_area">
-                <input type="button" value="改行" onclick="br_set()" class="btn tool_btn">
-                <input type="button" value="太字" onclick="b_set()" class="btn tool_btn">
-                <input type="button" value="下線" onclick="u_set()" class="btn tool_btn">
-                <!--<input type="button" value="斜め" onclick="i_set()" class="btn tool_btn">-->
-                <div class="color_pick_area">
-                    <input type="button" value="文字色" onclick="color_set()" class="btn tool_btn">
-                    <input type="color" id="pick_color" value="#dc143c">
+                <div class="btn_area">
+                    <input type="button" value="改行" onclick="br_set()" class="btn tool_btn">
+                    <input type="button" value="太字" onclick="b_set()" class="btn tool_btn">
+                    <input type="button" value="下線" onclick="u_set()" class="btn tool_btn">
+                    <!--<input type="button" value="斜め" onclick="i_set()" class="btn tool_btn">-->
+                    <div class="color_pick_area">
+                        <input type="button" value="文字色" onclick="color_set()" class="btn tool_btn">
+                        <input type="color" id="pick_color" value="#dc143c">
+                    </div>
+                    <input type="button" value="日付" onclick="insert_data()" class="btn tool_btn">
+                    <input type="button" value="戻す" onclick="undo()" class="btn tool_btn">
                 </div>
-                <input type="button" value="戻す" onclick="undo()" class="btn tool_btn">
-            </div>
 
-            <div class="output_btn_area">
-                <input type="button" value="出力" onclick="output_btn()" class="btn output_btn">
-            </div>
-        </div>
-        <div class="contents">
-            <div class="output_news">
-                <p>【変換後（タグなし）】</p>
-                <div class="title_output">
-                    <p>タイトル</p>
-                    <p id="title_result" title="タイトルをコピー"></p>
-                </div>
-                <div class="comment_output">
-                    <p>本文<span>（文字数：<span id="output_count"></span>）</span></p>
-                    <p id="comment_result" title="本文をコピー"></p>
+                <div class="output_btn_area">
+                    <input type="button" value="出力" onclick="output_btn()" class="btn output_btn">
                 </div>
             </div>
-            <div class="output_btn_area" style="margin-top:45px;">
-                <input type="button" value="テキストファイルで保存" onclick="dl_news()" class="btn dl_btn">
+            <div class="contents">
+                <div class="output_news">
+                    <p>【変換後（タグなし）】</p>
+                    <div class="title_output">
+                        <p>タイトル</p>
+                        <p id="title_result" title="タイトルをコピー"></p>
+                    </div>
+                    <div class="comment_output">
+                        <p>本文<span>（文字数：<span id="output_count"></span>）</span></p>
+                        <p id="comment_result" title="本文をコピー"></p>
+                    </div>
+                </div>
+                <div class="output_btn_area" style="margin-top:45px;">
+                    <input type="button" value="テキストファイルで保存" onclick="dl_news()" class="btn dl_btn">
+                </div>
             </div>
-        </div>
-        <div class="tool_tips">
-            <p>※htmlタグを使った記事を書いた後に「出力」ボタンを押すと、htmlタグを除去した状態でコピーできる文章を出力するツールです。</p>
-            <p>※出力した文章は見た目上はhtmlが反映されつつ、コピーするとタグの無いフラットな文になっていますので、改行やタグのプレビューにもお使い頂けます。</p>
-            <p>※出力後は、出力されたタイトルや本文をクリックすることで文章がコピーされます。</p>
-            <p>※各種htmlタグを追加するボタンは、ボタンを押す際に選択していた箇所に対応したhtmlタグを挿入し、複数文字を範囲選択していると、選択中の文字列を囲うようにタグを追加します。</p>
-            <p>※文字色ボタンは、文字色ボタンの右側のボタンをクリックすると出現するカラーピッカーで選んだ色のカラーコードを持ってタグを挿入します。</p>
-            <p>※タグを追加するボタンを押すと、その時点より前にctrl+z等で戻れなくなります。直前のタグ追加の操作は「戻す」ボタンで元に戻すことができます。</p>
-            <p>※タイトルにタグを追加する機能はありません。必要な場合は手入力をお願いします。</p>
-            <p>※「テキストファイルで保存」を行うと、タグあり/なし両方の文章が記載されたtxtファイルがdownloadフォルダに保存されます。ファイル名は日付＋タイトルになります。</p>
+            <div class="tool_tips">
+                <p>▼概要▼</p>
+                <p>本ツールはHTMLタグを含む文章をHTMLを適用した見た目でプレビューするツールです。</p>
+                <p>テキストエリアに文章を入力後、出力ボタンを押すことで変換された文章が出力されます。</p>
+                <p>出力されたHTMLの適用された文章は、クリックすることでHTMLの無い文章としてコピーできます。</p>
+                <p>▼機能▼</p>
+                <p>・「出力」ボタンを押すとHTMLタグを含む文章をタグ無し文章に変換し、プレビューします。</p>
+                <p> └ 出力ボタンを押したタイミングでブラウザのローカルに文章を保存し、リロードや再訪時にテキストエリアに文章を再表示します。</p>
+                <p>・改行、太字、下線、文字色、日付のHTMLタグを文章に追加できます。</p>
+                <p> ├ 改行、太字、下線、文字色は選択状態にした文字列の範囲にタグを追加します。</p>
+                <p> ├ 文字色はボタン横の色をクリックするとカラーピッカーを開き、挿入する色を変更できます。</p>
+                <p> ├ 日付ボタンを押すとyyyy/mm/dd 00:00の形で押下時の日時を文末に挿入します。</p>
+                <p> └ 戻るボタンを押すとボタンによる直前のタグ追加を元に戻します。</p>
+                <p>・出力後のタイトル、本文をクリックすることでコピーします。</p>
+                <p>・「テキストファイルで保存」を押すと、タグあり/なし両方の文章を含む日時_タイトル.txtファイルをローカルに保存します。</p>
+                <p> └ 保存時、ローカルストレージに保存していた文章情報を削除します。
+            </div>
         </div>
     </div>
+    <div class="date_html" onclick="data_insert"></div>
+    <footer class="writing_page"></footer>
+<script src="js/writing.js"></script>
 </body>
-<div class="date_html" onclick="data_insert"></div>
-
-<script>
-
-// ページが読み込まれた際にローカルストレージから値を取得して表示
-window.onload = function() {
-    var title = document.getElementById("input_title");
-    var textarea = document.getElementById("input_teatarea");
-    // ローカルストレージから値を取得して表示
-    var storedTitle = localStorage.getItem("savedTitle");
-    var storedComment = localStorage.getItem("savedComment");
-    if (storedTitle) {
-        title.value = storedTitle;
-    }
-    if (storedComment) {
-        textarea.value = storedComment;
-    }
-    //日付
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = String(today.getMonth() + 1).padStart(2, '0'); // 月を2桁に整形
-    var day = String(today.getDate()).padStart(2, '0'); // 日を2桁に整形
-
-    var hour = String(today.getHours()).padStart(2, '0'); // 時間を2桁に整形
-    var min = String(today.getMinutes()).padStart(2, '0'); // 分を2桁に整形
-    var time = hour + ":" + min;
-
-    // 日付を指定された形式に整形
-    var formattedDate = '<font color=#949494>' + year + '/' + month + '/' + day + " " + time + '</font>';
-
-    // HTML要素に日付を挿入
-    var dateElement = document.querySelector(".date_html");
-    dateElement.textContent = formattedDate;
-
-}
-
-// jsのタグ追加を元に戻す
-var previousState;
-function saveState() {
-    var textarea = document.getElementById("input_teatarea");
-    previousState = textarea.value;
-}
-
-function restoreState() {
-    var textarea = document.getElementById("input_teatarea");
-    textarea.value = previousState;
-    textarea.focus();
-}
-
-function undo() {
-    restoreState();
-}
-
-// htmlタグを追加する
-function br_set() {
-    saveState();
-    var textarea = document.getElementById("input_teatarea");
-    var startPos = textarea.selectionStart;
-    var endPos = textarea.selectionEnd;
-    var text = textarea.value;
-    var newText;
-
-    if (startPos !== endPos) {
-        // テキストが選択されている場合
-        var selectedText = text.substring(startPos, endPos);
-        newText = text.substring(0, startPos) + "<br />" + selectedText + "<br />" + text.substring(endPos, text.length);
-        textarea.value = newText;
-        textarea.setSelectionRange(startPos, endPos + 11);
-    } else {
-        // テキストが選択されていない場合
-        newText = text.substring(0, startPos) + "<br />" + text.substring(endPos, text.length);
-        textarea.value = newText;
-        textarea.setSelectionRange(startPos + 6, startPos + 6);
-    }
-
-    textarea.focus();
-}
-
-function b_set() {
-    saveState();
-    var textarea = document.getElementById("input_teatarea");
-    var scrollTop = textarea.scrollTop; // 1. 現在のスクロール位置を保存
-    var startPos = textarea.selectionStart;
-    var endPos = textarea.selectionEnd;
-    var text = textarea.value;
-    var newText = text.substring(0, startPos) + "<b>" + text.substring(startPos, endPos) + "</b>" + text.substring(endPos, text.length);
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(startPos, endPos + 7);
-    textarea.scrollTop = scrollTop; // 2. スクロール位置を復元
-}
-
-function u_set() {
-    saveState();
-    var textarea = document.getElementById("input_teatarea");
-    var scrollTop = textarea.scrollTop;
-    var startPos = textarea.selectionStart;
-    var endPos = textarea.selectionEnd;
-    var text = textarea.value;
-    var newText = text.substring(0, startPos) + "<u>" + text.substring(startPos, endPos) + "</u>" + text.substring(endPos, text.length);
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(startPos, endPos + 7);
-    textarea.scrollTop = scrollTop;
-}
-
-function color_set() {
-    saveState();
-    var textarea = document.getElementById("input_teatarea");
-    var scrollTop = textarea.scrollTop;
-    var startPos = textarea.selectionStart;
-    var endPos = textarea.selectionEnd;
-    var text = textarea.value;
-    var pickcolor_area = document.getElementById("pick_color");
-    var pickcolor = pickcolor_area.value;
-    var newText = text.substring(0, startPos) + "<font color=" + pickcolor + ">" + text.substring(startPos, endPos) + "</font>" + text.substring(endPos, text.length);
-    textarea.value = newText;
-    textarea.focus();
-    textarea.setSelectionRange(startPos, endPos + 7);
-    textarea.scrollTop = scrollTop;
-}
-
-
-
-// htmlタグを文章中から除去して出力し、同時にローカルストレージに内容を保存
-function output_btn() {
-    var titleInput = document.getElementById("input_title");
-    var commentInput = document.getElementById("input_teatarea");
-    var titleOutput = document.getElementById("title_result");
-    var commentOutput = document.getElementById("comment_result");
-    var outputCount = document.getElementById("output_count");
-    var titleValue = titleInput.value.trim();
-    var commentValue = commentInput.value.trim();
-
-    // ローカルストレージに値を保存
-    localStorage.setItem("savedTitle", titleValue);
-    localStorage.setItem("savedComment", commentValue);
-  
-    // 変換前に存在していた改行コード（\n）の削除
-    commentValue = commentValue.replace(/\n/g, '');
-    // brかpの閉じタグがあれば\nの改行コードを追加
-    commentValue = commentValue.replace(/(<br>|<\/br>|<br \/>|<\/p>)/g, "$&\n");
-    // 文字数カウント用にhtmlコードや改行コードを削除
-    var commentValueNoHtml = commentValue.replace(/(<([^>]+)>|\n)/ig, "");
-    
-    // 出力
-    titleOutput.innerHTML = titleValue;
-    commentOutput.innerHTML = commentValue;
-    // 文字数出力
-    outputCount.textContent = commentValueNoHtml.length.toString();
-}
-
-// フラットにしたの文章をコピーする
-document.getElementById("title_result").addEventListener("click", function() {
-    copy_result_text(this.textContent);
-    alert("タイトルがコピーされました");
-});
-
-document.getElementById("comment_result").addEventListener("click", function() {
-    copy_result_text(this.textContent);
-    alert("本文がコピーされました");
-});
-
-function copy_result_text(text) {
-    const el = document.createElement("textarea");
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-}
-
-// 入力中の文字数管理
-var inputTextarea = document.getElementById("input_teatarea");
-var inputCount = document.getElementById("input_count");
-
-inputTextarea.addEventListener("input", update_textcount);
-document.addEventListener("click", function(event) {
-    if (event.target !== inputTextarea) {
-        update_textcount();
-    }
-});
-
-function update_textcount() {
-    var text = inputTextarea.value.replace(/(<([^>]+)>|\n)/ig, "");;
-    var count = text.length;
-    inputCount.textContent = count.toString();
-}
-
-// txtファイルで記事の内容を保存
-function dl_news() {
-    var day = new Date().toLocaleDateString('sv-SE')
-    // テキストファイルの内容を取得
-    var inputTitle = document.getElementById("input_title").value.trim();
-    var inputText = document.getElementById("input_teatarea").value.trim();
-    var outputTitle = document.getElementById("title_result").innerText.trim();
-    var outputText = document.getElementById("comment_result").innerText.trim();
-    var fileContent = "執筆日：" + day + "\n\n" + 
-        "【htmlタグあり】\n" +
-        "タイトル：" + inputTitle + "\n" +
-        "本文：\n" + inputText + "\n" +
-        "\n――――――――\n\n" +
-        "【htmlタグなし】\n" +
-        "タイトル：" + outputTitle + "\n" +
-        "本文：\n" + outputText;
-    // Blobオブジェクトを作成してテキストファイルを作成
-    var blob = new Blob([fileContent], { type: "text/plain" });
-
-    // ダウンロードリンクを生成
-    var downloadLink = document.createElement("a");
-    downloadLink.download = day + "_"  + outputTitle + ".txt"; // yy-mm-dd_タイトル.txtのファイル名で保存
-    downloadLink.href = window.URL.createObjectURL(blob);
-    downloadLink.click();
-
-    // ローカルストレージから保存された値を削除
-    localStorage.removeItem("savedTitle");
-    localStorage.removeItem("savedComment");
-}
-</script>
-
-<style type="text/css">
-/* CSS */
-body,p,ul,td,th{
-    margin: inherit;
-    padding: inherit;
-}
-
-h1{
-    text-align: center;
-    margin-top: 20px;
-}
-
-input:focus,input:active ,input, textarea:focus, textarea:active, textarea{
-    outline: none;
-    border: 1px solid black;
-    border-radius: 0px;
-    background-color: transparent;
-}
-
-textarea{
-    resize: vertical;
-}
-
-p,input,textarea{
-    font-size: 16px;
-}
-
-.tools{
-    place-content: center;
-    margin:20px 10px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-
-.contents{
-    width: 500px;
-    background-color: white;
-    padding: 20px;
-    border: 1px solid black;
-    border-radius: 15px;
-}
-
-@media (max-width: 1160px) {
-  .contents {
-    /* スタイルの指定 */
-    width: 400px;
-  }
-  .tools{
-    gap: 30px;
-  }
-}
-
-@media (max-width: 950px) {
-  .contents {
-    /* スタイルの指定 */
-    width: 360px;
-  }
-  .tools{
-    gap: 20px;
-  }
-}
-
-@media (max-width: 860px) {
-  .contents {
-    /* スタイルの指定 */
-    width: 550px;
-  }
-  .tools{
-    gap: 40px;
-  }
-}
-
-.input_news, .output_news{
-    display: flex;
-    flex-flow: column;
-    gap: 10px;
-}
-
-.title_input, .title_output{
-    display: flex;
-}
-
-.title_input p,.title_output p{
-    background-color: #dc143c;
-    color: white;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    padding: 0 10px;
-    width: 20%;
-    text-align: center;
-}
-
-#title_result{
-    background-color: transparent;
-    border-right: 1px solid black;
-    background-color: #f0f0f0;
-    color: black;
-    text-align: left;
-    cursor: pointer;
-}
-
-.title_input input, .title_output input, #title_result{
-    width: 80%;
-    padding-left: 5px;
-}
-
-.comment_input textarea, .comment_output textarea, #comment_result{
-    width: 100%;
-    min-height: 300px;
-}
-
-#comment_result{
-    border:1px solid black;
-    background-color: #f0f0f0;
-    cursor: pointer;
-}
-
-.btn_area{
-    display: flex;
-    margin:10px 0;
-    gap: 5px;
-    justify-content: end;
-    flex-wrap: wrap;
-}
-.color_pick_area{
-    display: flex;
-    gap: 2px;
-}
-.btn{
-    transition: all 0.15s ease;
-    --animation-duration: 0.5s;
-    border-radius: 5px;
-    height: 30px;
-}
-
-.btn:hover{
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn:active{
-    transform: scale(0.9);
-}
-
-.btn:focus{
-    border-radius: 5px;
-}
-
-.tool_btn:hover{
-    background-color: #a9a9a9;
-    color: white;
-}
-
-#pick_color{
-    height: 30px;
-    width: 30px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.output_btn_area{
-    text-align: center;
-}
-
-.output_btn, .output_btn:focus{
-    max-width: 200px;
-    width: 100%;
-    background-color: #ff8c00;
-    color: white;
-}
-
-.output_btn:hover, .output_btn:active{
-    background-color: #ffddb6;
-    color: black;
-}
-
-.dl_btn, .dl_btn:focus{
-    max-width: 200px;
-    width: 100%;
-    background-color: #4b99ff;
-    color: white;
-}
-
-.dl_btn:hover, .dl_btn:active{
-    background-color: #c4e9ff;
-    color: black;
-}
-
-
-.output_news input,.output_news textarea{
-    background-color: #f5f5f5;
-}
-
-.tool_tips{
-    max-width: 1100px;
-    width: 100%;
-    margin :0 auto;
-}
-
-.tool_tips p{
-    font-size: 14px;
-}
-
-
-</style>
 </html>
