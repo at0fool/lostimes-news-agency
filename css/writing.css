@@ -35,6 +35,7 @@ input:focus,input:active ,input, textarea:focus, textarea:active, textarea{
 
 textarea{
     resize: vertical;
+    font-family: 'ＭＳ ゴシック', 'Osaka-等幅';
 }
 
 p,input,textarea{
@@ -72,6 +73,15 @@ textarea, #comment_result{
     display: flex;
 }
 
+#input_user_b{
+    margin-left: 5px;
+}
+
+#input_title{
+    font-size: 18px;
+    font-family: 'ＭＳ ゴシック', 'Osaka-等幅';
+}
+
 .title_input p,.title_output p{
     background-color: #dc143c;
     color: white;
@@ -80,6 +90,26 @@ textarea, #comment_result{
     border-left: 1px solid black;
     padding: 3px 10px;
     width: 20%;
+    text-align: center;
+}
+
+.writing_user{
+    margin: 10px 0 10px auto;
+    width: 50%;
+    text-align: center;
+}
+
+.writing_user .title_input input{
+    width: 35%;
+    padding: 0;
+}
+
+.writing_user .title_input p{
+    width: 35%;
+    background-color: transparent;
+    color: black;
+    border: none;
+    padding: 3px 10px;
     text-align: center;
 }
 
@@ -97,6 +127,10 @@ textarea, #comment_result{
     padding-left: 5px;
 }
 
+.comment_input{
+    width: 100%;
+    margin: 0 auto;
+}
 .comment_input textarea, .comment_output textarea, #comment_result{
     width: 100%;
     min-height: 300px;
@@ -172,12 +206,24 @@ textarea, #comment_result{
 .dl_btn, .dl_btn:focus{
     max-width: 200px;
     width: 100%;
-    background-color: #4b99ff;
+    background-color: #dc143c;
     color: white;
 }
 
 .dl_btn:hover, .dl_btn:active{
-    background-color: #c4e9ff;
+    background-color: #ff9aae;
+    color: black;
+}
+
+.twix_btn, .twix_btn:focus{
+    max-width: 200px;
+    width: 100%;
+    background-color: #666bfb;
+    color: white;
+}
+
+.twix_btn:hover, .twix_btn:active{
+    background-color: rgb(176, 163, 255);
     color: black;
 }
 
@@ -219,9 +265,15 @@ textarea, #comment_result{
 /* 480px～599px 小型タブレット
 ------------------------------ */
 @media screen and (min-width: 480px) and (max-width: 599px) {
+    .writing_user{
+        width: 75%;
+    } 
 }
 
 /* 0px～479px スマートフォン
 ------------------------------ */
 @media screen and (max-width: 479px) {
+    .writing_user{
+        width: 80%;
+    } 
 }
