@@ -178,7 +178,7 @@ function insert_name() {
 }
 
 
-// htmlタグを文章中から除去して出力し、同時にローカルストレージに内容を保存
+// ローカルストレージに内容を保存
 function writing_save() {
     var titleInput = document.getElementById("input_title");
     var commentInput = document.getElementById("input_teatarea");
@@ -192,6 +192,15 @@ function writing_save() {
     localStorage.setItem("savedComment", commentValue);
     localStorage.setItem("savedName1", name1);
     localStorage.setItem("savedName2", name2);
+
+    // 「保存済み」に変更
+    var saveButton = document.getElementById("save_btn");
+    saveButton.value = "保存済み";
+
+    // 3秒後にボタンを元に戻す
+    setTimeout(function() {
+        saveButton.value = "一時保存";
+    }, 500);
 }
 
 // フラットにした文章をコピーする
@@ -324,5 +333,5 @@ function cp_tweet() {
     // 不要なテキストエリアを削除
     document.body.removeChild(textArea);
 
-    alert("タイトルがコピーされました");
+    alert("ツイート文言がコピーされました");
 }
