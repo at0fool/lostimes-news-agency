@@ -36,63 +36,49 @@
                         <textarea id="input_teatarea" placeholder="本文を入力"></textarea>
                     </div>
                 </div>
+                <div class="writing_user">
+                    <div class="title_input">
+                        <p>執筆者</p>
+                        <input type="text" id="input_user_a" name="title" placeholder="姓">
+                        <input type="text" id="input_user_b" name="title" placeholder="名">
+                    </div>
+                </div>
 
                 <div class="btn_area">
-                    <input type="button" value="全改行" onclick="all_br_set()" class="btn tool_btn">
-                    <input type="button" value="改行" onclick="br_set()" class="btn tool_btn">
-                    <input type="button" value="太字" onclick="b_set()" class="btn tool_btn">
-                    <input type="button" value="下線" onclick="u_set()" class="btn tool_btn">
-                    <!--<input type="button" value="斜め" onclick="i_set()" class="btn tool_btn">-->
-                    <div class="color_pick_area">
-                        <input type="button" value="文字色" onclick="color_set()" class="btn tool_btn">
-                        <input type="color" id="pick_color" value="#dc143c">
-                    </div>
+                    <input type="button" value="タイトルコピー" onclick="cp_title()" class="btn tool_btn">
+                    <input type="button" value="本文コピー" onclick="cp_contents()" class="btn tool_btn">
+                    <input type="button" value="執筆者名" onclick="insert_name()" class="btn tool_btn">
                     <input type="button" value="日付" onclick="insert_data()" class="btn tool_btn">
+                    <input type="button" value="横17" onclick="btn_17()" class="btn tool_btn" id="width_btn_a">
+                    <input type="button" value="横def" onclick="btn_default()" class="btn tool_btn" id="width_btn_b" style="display:none">
                     <input type="button" value="戻す" onclick="undo()" class="btn tool_btn">
                 </div>
-
                 <div class="output_btn_area">
-                    <input type="button" value="出力" onclick="output_btn()" class="btn output_btn">
+                    <input type="button" value="一時保存" onclick="writing_save()" class="btn output_btn" title="ブラウザに現在の入力を保存します">
                 </div>
-            </div>
-            <div class="contents">
-                <div class="output_news">
-                    <p>【変換後（タグなし）】</p>
-                    <div class="title_output">
-                        <p>タイトル</p>
-                        <p id="title_result" title="タイトルをコピー"></p>
-                    </div>
-                    <div class="comment_output">
-                        <p>本文<span>（文字数：<span id="output_count"></span>）</span></p>
-                        <p id="comment_result" title="本文をコピー"></p>
-                    </div>
+                <div class="output_btn_area" style="margin-top:15px;">
+                    <input type="button" value="ツイート文言" onclick="cp_tweet()" class="btn twix_btn">
                 </div>
-                <div class="output_btn_area" style="margin-top:45px;">
+                <div class="output_btn_area" style="margin-top:15px;">
                     <input type="button" value="テキストファイルで保存" onclick="dl_news()" class="btn dl_btn">
                 </div>
             </div>
-            <div class="tool_tips">
-                <p>▼概要▼</p>
-                <p>本ツールはHTMLタグを含む文章をHTMLを適用した見た目でプレビューするツールです。</p>
-                <p>テキストエリアに文章を入力後、出力ボタンを押すことで変換された文章が出力されます。</p>
-                <p>出力されたHTMLの適用された文章は、クリックすることでHTMLの無い文章としてコピーできます。</p>
-                <p>▼機能▼</p>
-                <p>・「出力」ボタンを押すとHTMLタグを含む文章をタグ無し文章に変換し、プレビューします。</p>
-                <p> └ 出力ボタンを押したタイミングでブラウザのローカルに文章を保存し、リロードや再訪時にテキストエリアに文章を再表示します。</p>
-                <p>・改行、太字、下線、文字色、日付のHTMLタグを文章に追加できます。</p>
-                <p> ├ 全改行ボタンを押すとテキストエリア内の改行されている箇所全てに改行タグを追加します。
-                <p> ├ 太字、下線、文字色は選択状態にした文字列の範囲にタグを追加します。</p>
-                <p> ├ 文字色はボタン横の色をクリックするとカラーピッカーを開き、挿入する色を変更できます。</p>
-                <p> ├ 日付ボタンを押すとyyyy/mm/dd 00:00の形で押下時の日時を文末に挿入します。</p>
-                <p> └ 戻るボタンを押すとボタンによる直前のタグ追加を元に戻します。</p>
-                <p>・出力後のタイトル、本文をクリックすることでコピーします。</p>
-                <p>・「テキストファイルで保存」を押すと、タグあり/なし両方の文章を含む日時_タイトル.txtファイルをローカルに保存します。</p>
-                <p> └ 保存時、ローカルストレージに保存していた文章情報を削除します。
-            </div>
+        </div>
+        <div class="tool_tips">
+            <p>▼概要▼</p>
+            <p>本ツールはHTMLタグを含む文章をHTMLを適用した見た目でプレビューするツールです。</p>
         </div>
     </div>
     <div class="date_html" onclick="data_insert"></div>
     <footer class="writing_page"></footer>
 <script src="js/writing.js"></script>
+
+<style>
+#input_teatarea {
+    overflow-y: scroll; /* 常にスクロールバーを表示 */
+    -ms-overflow-style: scrollbar; /* IE11 */
+    scrollbar-width: thin; /* Firefox */
+}
+</style>
 </body>
 </html>

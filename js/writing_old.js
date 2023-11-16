@@ -3,25 +3,16 @@
 window.onload = function() {
     var title = document.getElementById("input_title");
     var textarea = document.getElementById("input_teatarea");
-    var name1 = document.getElementById("input_user_a");
-    var name2 = document.getElementById("input_user_b");
     // ローカルストレージから値を取得して表示
     var storedTitle = localStorage.getItem("savedTitle");
     var storedComment = localStorage.getItem("savedComment");
-    var storedName1 = localStorage.getItem("savedName1");
-    var storedName2 = localStorage.getItem("savedName2");
     if (storedTitle) {
         title.value = storedTitle;
     }
     if (storedComment) {
         textarea.value = storedComment;
     }
-    if (storedName1) {
-        name1.value = storedName1;
-    }
-    if (storedName2) {
-        name2.value = storedName2;
-    }
+
 }
 
 // jsのタグ追加を元に戻す
@@ -135,7 +126,7 @@ function insert_data() {
     var hour = String(today.getHours()).padStart(2, '0');
     var min = String(today.getMinutes()).padStart(2, '0');
     var time = hour + ":" + min;
-    var formattedDate = "\n" + year + '/' + month + '/' + day + " " + time;
+    var formattedDate = '<font color=#949494>' + year + '/' + month + '/' + day + " " + time + '</font>';
 
     // テキストエリアの現在の内容を取得
     var currentContent = textarea.value;
@@ -147,70 +138,45 @@ function insert_data() {
     textarea.scrollTop = textarea.scrollHeight;
 }
 
-function insert_name() {
-    saveState();
-    var textarea = document.getElementById("input_teatarea");
-
-    // 名取得
-    var name1 = document.getElementById("input_user_a").value;
-    var name2 = document.getElementById("input_user_b").value;
-    if(name1 && name2){
-        var name = name1 + name2;
-    }else if(name1){
-        var name = name1;
-    }else if(name2){
-        var name = name2;
-    }else{
-        var name = "匿名";
-    }
-    
-    // テキストエリアの現在の内容を取得
-    var currentContent = textarea.value;
-    
-    // 新しい行を作成し、執筆者名を追加
-    var newContent = currentContent + '\n\n' + '(執筆者：' + name + ")";
-    
-    // テキストエリアに新しい内容を設定
-    textarea.value = newContent;
-    
-    // スクロールバーを一番下にスクロール
-    textarea.scrollTop = textarea.scrollHeight;
-}
-
 
 // htmlタグを文章中から除去して出力し、同時にローカルストレージに内容を保存
-function writing_save() {
+function output_btn() {
     var titleInput = document.getElementById("input_title");
     var commentInput = document.getElementById("input_teatarea");
-    var name1 = document.getElementById("input_user_a").value;
-    var name2 = document.getElementById("input_user_b").value;
-    var titleValue = titleInput.value.trimEnd();
+    var titleOutput = document.getElementById("title_result");
+    var commentOutput = document.getElementById("comment_result");
+    var outputCount = document.getElementById("output_count");
+    var titleValue = titleInput.value.trim();
     var commentValue = commentInput.value.trimEnd();
 
     // ローカルストレージに値を保存
     localStorage.setItem("savedTitle", titleValue);
     localStorage.setItem("savedComment", commentValue);
-    localStorage.setItem("savedName1", name1);
-    localStorage.setItem("savedName2", name2);
+  
+    // 変換前に存在していた改行コード（\n）の削除
+    commentValue = commentValue.replace(/\n/g, '');
+    // brかpの閉じタグがあれば\nの改行コードを追加
+    commentValue = commentValue.replace(/(<br>|<\/br>|<br \/>|<\/p>)/g, "$&\n");
+    // 文字数カウント用にhtmlコードや改行コードを削除
+    var commentValueNoHtml = commentValue.replace(/(<([^>]+)>|\n)/ig, "");
+    
+    // 出力
+    titleOutput.innerHTML = titleValue;
+    commentOutput.innerHTML = commentValue;
+    // 文字数出力
+    outputCount.textContent = commentValueNoHtml.length.toString();
 }
 
 // フラットにした文章をコピーする
-function cp_title() {
-    // Get the input element by its id
-    var inputElement = document.getElementById("input_title");
-    inputElement.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges();
+document.getElementById("title_result").addEventListener("click", function() {
+    copy_result_text(this.textContent);
     alert("タイトルがコピーされました");
-}
+});
 
-function cp_contents() {
-    var inputElement = document.getElementById("input_teatarea");
-    inputElement.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges();
+document.getElementById("comment_result").addEventListener("click", function() {
+    copy_result_text(this.textContent);
     alert("本文がコピーされました");
-}
+});
 
 function copy_result_text(text) {
     const el = document.createElement("textarea");
@@ -244,85 +210,26 @@ function dl_news() {
     // テキストファイルの内容を取得
     var inputTitle = document.getElementById("input_title").value.trim();
     var inputText = document.getElementById("input_teatarea").value.trim();
+    var outputTitle = document.getElementById("title_result").innerText.trim();
+    var outputText = document.getElementById("comment_result").innerText.trim();
     var fileContent = "執筆日：" + day + "\n\n" + 
+        "【htmlタグあり】\n" +
         "タイトル：" + inputTitle + "\n" +
         "本文：\n" + inputText + "\n" +
-        "\n――――――――\n\n";
+        "\n――――――――\n\n" +
+        "【htmlタグなし】\n" +
+        "タイトル：" + outputTitle + "\n" +
+        "本文：\n" + outputText;
     // Blobオブジェクトを作成してテキストファイルを作成
     var blob = new Blob([fileContent], { type: "text/plain" });
 
     // ダウンロードリンクを生成
     var downloadLink = document.createElement("a");
-    downloadLink.download = day + "_"  + inputTitle + ".txt"; // yy-mm-dd_タイトル.txtのファイル名で保存
+    downloadLink.download = day + "_"  + outputTitle + ".txt"; // yy-mm-dd_タイトル.txtのファイル名で保存
     downloadLink.href = window.URL.createObjectURL(blob);
     downloadLink.click();
-}
 
-function btn_17() {
-    var comment_area = document.getElementsByClassName('comment_input')[0];
-    var w_btn_a = document.getElementById('width_btn_a');
-    var w_btn_b = document.getElementById('width_btn_b');
-
-    // スマートフォンからのアクセスかどうかを判定
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    w_btn_a.style.display = 'none';
-    w_btn_b.style.display = 'block';
-
-    // 判定結果に基づいて異なる横幅を設定
-    if (isMobile) {
-        comment_area.style.width = '278px';  // スマートフォンの場合
-    } else {
-        comment_area.style.width = '288px';  // スマートフォン以外の場合
-    }
-}
-
-function btn_default(){
-    var comment_area = document.getElementsByClassName('comment_input')[0];
-    var w_btn_a = document.getElementById('width_btn_a');
-    var w_btn_b = document.getElementById('width_btn_b');
-    w_btn_a.style.display = 'block';
-    w_btn_b.style.display = 'none';
-
-    comment_area.style.width = '100%';
-}
-
-// フラットにした文章をコピーする
-function cp_tweet() {
-    var inputtitle = document.getElementById("input_title");
-    var name1 = document.getElementById("input_user_a").value;
-    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。(' + name1 +')';
-    tweet.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges();
-    alert("タイトルがコピーされました");
-}
-
-function cp_tweet() {
-    var inputtitle = document.getElementById("input_title").value;
-    var name1 = document.getElementById("input_user_a").value;
-    var name2 = document.getElementById("input_user_b").value;name ="";
-    if(name1){
-        var name = '(' + name1 +')';
-    }else if(name2){
-        var name = '(' + name2 +')';
-    }
-    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。' + name;
-    // テキストエリアを作成し、内容を設定
-    var textArea = document.createElement("textarea");
-    textArea.value = tweet;
-
-    // 範囲外にコピー元となるテキストエリアを生成
-    textArea.style.position = "absolute";
-    textArea.style.left = "-9999px";
-    document.body.appendChild(textArea);
-    textArea.select();
-
-    // コピー操作を実行
-    document.execCommand("copy");
-
-    // 不要なテキストエリアを削除
-    document.body.removeChild(textArea);
-
-    alert("タイトルがコピーされました");
+    // ローカルストレージから保存された値を削除
+    localStorage.removeItem("savedTitle");
+    localStorage.removeItem("savedComment");
 }

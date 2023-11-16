@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- ツールについてのお問い合わせ、要望はふーる/紫月零矢(@at_fool_trpg)までお願いします。 -->
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow,noarchive" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/favicon.ico" id="favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.png">
+    <title>ロスタイムズ情報局 | 執筆支援ツール</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;400;500;600;700;900&family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/writing.css">
+    <script src="js/layout.js"></script>
+    <script src="js/common.js"></script>
+</head>
+<body>
+    <header class="writing_page"></header>
+    <div id="writing_tool">
+        <h1><span style="background-color: #dc143c;color: white;padding: 0 10px;">NEWS</span> 執筆支援ツール</h1>
+        <div class="tools">
+            <div class="contents">
+                <div class="input_news">
+                    <p>【変換前（タグあり）】</p>
+                    <div class="title_input">
+                        <p>タイトル</p>
+                        <input type="text" id="input_title" name="title" placeholder="タイトルを入力">
+                    </div>
+                    <div class="comment_input">
+                        <p>本文<span>（文字数：<span id="input_count"></span>）</span></p>
+                        <textarea id="input_teatarea" placeholder="本文を入力"></textarea>
+                    </div>
+                </div>
+
+                <div class="btn_area">
+                    <input type="button" value="全改行" onclick="all_br_set()" class="btn tool_btn">
+                    <input type="button" value="改行" onclick="br_set()" class="btn tool_btn">
+                    <input type="button" value="太字" onclick="b_set()" class="btn tool_btn">
+                    <input type="button" value="下線" onclick="u_set()" class="btn tool_btn">
+                    <!--<input type="button" value="斜め" onclick="i_set()" class="btn tool_btn">-->
+                    <div class="color_pick_area">
+                        <input type="button" value="文字色" onclick="color_set()" class="btn tool_btn">
+                        <input type="color" id="pick_color" value="#dc143c">
+                    </div>
+                    <input type="button" value="日付" onclick="insert_data()" class="btn tool_btn">
+                    <input type="button" value="戻す" onclick="undo()" class="btn tool_btn">
+                </div>
+
+                <div class="output_btn_area">
+                    <input type="button" value="出力" onclick="output_btn()" class="btn output_btn">
+                </div>
+            </div>
+            <div class="contents">
+                <div class="output_news">
+                    <p>【変換後（タグなし）】</p>
+                    <div class="title_output">
+                        <p>タイトル</p>
+                        <p id="title_result" title="タイトルをコピー"></p>
+                    </div>
+                    <div class="comment_output">
+                        <p>本文<span>（文字数：<span id="output_count"></span>）</span></p>
+                        <p id="comment_result" title="本文をコピー"></p>
+                    </div>
+                </div>
+                <div class="output_btn_area" style="margin-top:45px;">
+                    <input type="button" value="テキストファイルで保存" onclick="dl_news()" class="btn dl_btn">
+                </div>
+            </div>
+            <div class="tool_tips">
+                <p>▼概要▼</p>
+                <p>本ツールはHTMLタグを含む文章をHTMLを適用した見た目でプレビューするツールです。</p>
+                <p>テキストエリアに文章を入力後、出力ボタンを押すことで変換された文章が出力されます。</p>
+                <p>出力されたHTMLの適用された文章は、クリックすることでHTMLの無い文章としてコピーできます。</p>
+                <p>▼機能▼</p>
+                <p>・「出力」ボタンを押すとHTMLタグを含む文章をタグ無し文章に変換し、プレビューします。</p>
+                <p> └ 出力ボタンを押したタイミングでブラウザのローカルに文章を保存し、リロードや再訪時にテキストエリアに文章を再表示します。</p>
+                <p>・改行、太字、下線、文字色、日付のHTMLタグを文章に追加できます。</p>
+                <p> ├ 全改行ボタンを押すとテキストエリア内の改行されている箇所全てに改行タグを追加します。
+                <p> ├ 太字、下線、文字色は選択状態にした文字列の範囲にタグを追加します。</p>
+                <p> ├ 文字色はボタン横の色をクリックするとカラーピッカーを開き、挿入する色を変更できます。</p>
+                <p> ├ 日付ボタンを押すとyyyy/mm/dd 00:00の形で押下時の日時を文末に挿入します。</p>
+                <p> └ 戻るボタンを押すとボタンによる直前のタグ追加を元に戻します。</p>
+                <p>・出力後のタイトル、本文をクリックすることでコピーします。</p>
+                <p>・「テキストファイルで保存」を押すと、タグあり/なし両方の文章を含む日時_タイトル.txtファイルをローカルに保存します。</p>
+                <p> └ 保存時、ローカルストレージに保存していた文章情報を削除します。
+            </div>
+        </div>
+    </div>
+    <div class="date_html" onclick="data_insert"></div>
+    <footer class="writing_page"></footer>
+<script src="js/writing_old.js"></script>
+</body>
+</html>
