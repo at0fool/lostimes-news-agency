@@ -168,7 +168,7 @@ function insert_name() {
     var currentContent = textarea.value;
     
     // 新しい行を作成し、執筆者名を追加
-    var newContent = currentContent + '\n\n' + '(執筆者：' + name + ")";
+    var newContent = currentContent + '\n\n' + '(記事執筆：' + name + ")";
     
     // テキストエリアに新しい内容を設定
     textarea.value = newContent;
