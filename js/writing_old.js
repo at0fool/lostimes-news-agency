@@ -73,7 +73,7 @@ function br_set() {
 function b_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
-    var scrollTop = textarea.scrollTop; // 1. 現在のスクロール位置を保存
+    var scrollTop = textarea.scrollTop; // 現在のスクロール位置を保存
     var startPos = textarea.selectionStart;
     var endPos = textarea.selectionEnd;
     var text = textarea.value;
@@ -81,7 +81,7 @@ function b_set() {
     textarea.value = newText;
     textarea.focus();
     textarea.setSelectionRange(startPos, endPos + 7);
-    textarea.scrollTop = scrollTop; // 2. スクロール位置を復元
+    textarea.scrollTop = scrollTop; // スクロール位置を復元
 }
 
 function u_set() {
@@ -220,10 +220,9 @@ function dl_news() {
         "【htmlタグなし】\n" +
         "タイトル：" + outputTitle + "\n" +
         "本文：\n" + outputText;
-    // Blobオブジェクトを作成してテキストファイルを作成
+    // テキストファイルを作成
     var blob = new Blob([fileContent], { type: "text/plain" });
 
-    // ダウンロードリンクを生成
     var downloadLink = document.createElement("a");
     downloadLink.download = day + "_"  + outputTitle + ".txt"; // yy-mm-dd_タイトル.txtのファイル名で保存
     downloadLink.href = window.URL.createObjectURL(blob);

@@ -49,6 +49,7 @@ function all_br_set(){
     saveState();
     var textarea = document.getElementById("input_teatarea");
     var text = textarea.value;
+    // テキストエリア内の改行箇所全てにbrタグを追加したものをtextWithBrTagsに
     var textWithBrTags = text.replace(/\n/g, "<br />\n");
 
     // テキストエリアに置き換えたテキストを設定
@@ -82,7 +83,7 @@ function br_set() {
 function b_set() {
     saveState();
     var textarea = document.getElementById("input_teatarea");
-    var scrollTop = textarea.scrollTop; // 1. 現在のスクロール位置を保存
+    var scrollTop = textarea.scrollTop; // 現在のスクロール位置を保存
     var startPos = textarea.selectionStart;
     var endPos = textarea.selectionEnd;
     var text = textarea.value;
@@ -90,7 +91,7 @@ function b_set() {
     textarea.value = newText;
     textarea.focus();
     textarea.setSelectionRange(startPos, endPos + 7);
-    textarea.scrollTop = scrollTop; // 2. スクロール位置を復元
+    textarea.scrollTop = scrollTop; // スクロール位置を復元
 }
 
 function u_set() {
@@ -166,13 +167,13 @@ function insert_name() {
     
     // テキストエリアの現在の内容を取得
     var currentContent = textarea.value;
-    
+
     // 新しい行を作成し、執筆者名を追加
     var newContent = currentContent + '\n\n' + '(記事執筆：' + name + ")";
-    
+
     // テキストエリアに新しい内容を設定
     textarea.value = newContent;
-    
+
     // スクロールバーを一番下にスクロール
     textarea.scrollTop = textarea.scrollHeight;
 }
@@ -193,7 +194,7 @@ function writing_save() {
     localStorage.setItem("savedName1", name1);
     localStorage.setItem("savedName2", name2);
 
-    // 「保存済み」に変更
+    // 「保存済み」にボタンの見た目を変更
     var saveButton = document.getElementById("save_btn");
     saveButton.value = "保存済み";
 
@@ -205,7 +206,6 @@ function writing_save() {
 
 // フラットにした文章をコピーする
 function cp_title() {
-    // Get the input element by its id
     var inputElement = document.getElementById("input_title");
     inputElement.select();
     document.execCommand("copy");
@@ -255,9 +255,8 @@ function dl_news() {
     var inputText = document.getElementById("input_teatarea").value.trim();
     var fileContent = "執筆日：" + day + "\n\n" + 
         "タイトル：" + inputTitle + "\n" +
-        "本文：\n" + inputText + "\n" +
-        "\n――――――――\n\n";
-    // Blobオブジェクトを作成してテキストファイルを作成
+        "本文：\n" + inputText + "\n";
+    // テキストファイルを作成
     var blob = new Blob([fileContent], { type: "text/plain" });
 
     // ダウンロードリンクを生成
@@ -267,12 +266,13 @@ function dl_news() {
     downloadLink.click();
 }
 
+// 全角横17文字になるようにテキストエリア幅を調整する
 function btn_17() {
     var comment_area = document.getElementsByClassName('comment_input')[0];
     var w_btn_a = document.getElementById('width_btn_a');
     var w_btn_b = document.getElementById('width_btn_b');
 
-    // スマートフォンからのアクセスかどうかを判定
+    // UserAgentを基準にスマートフォンからのアクセスかどうかを判定
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
     w_btn_a.style.display = 'none';
@@ -286,6 +286,7 @@ function btn_17() {
     }
 }
 
+// 幅を元に戻す
 function btn_default(){
     var comment_area = document.getElementsByClassName('comment_input')[0];
     var w_btn_a = document.getElementById('width_btn_a');
@@ -294,17 +295,6 @@ function btn_default(){
     w_btn_b.style.display = 'none';
 
     comment_area.style.width = '100%';
-}
-
-// フラットにした文章をコピーする
-function cp_tweet() {
-    var inputtitle = document.getElementById("input_title");
-    var name1 = document.getElementById("input_user_a").value;
-    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。(' + name1 +')';
-    tweet.select();
-    document.execCommand("copy");
-    window.getSelection().removeAllRanges();
-    alert("タイトルがコピーされました");
 }
 
 function cp_tweet() {
@@ -316,7 +306,7 @@ function cp_tweet() {
     }else if(name2){
         var name = '(' + name2 +')';
     }
-    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。' + name;
+    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。' + name + '\n #ロスタイムズ情報局からのおしらせ ';
     // テキストエリアを作成し、内容を設定
     var textArea = document.createElement("textarea");
     textArea.value = tweet;
@@ -327,10 +317,10 @@ function cp_tweet() {
     document.body.appendChild(textArea);
     textArea.select();
 
-    // コピー操作を実行
+    // コピーを実行
     document.execCommand("copy");
 
-    // 不要なテキストエリアを削除
+    // 精製したテキストエリアを削除
     document.body.removeChild(textArea);
 
     alert("ツイート文言がコピーされました");
