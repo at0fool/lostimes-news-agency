@@ -306,7 +306,7 @@ function cp_tweet() {
     }else if(name2){
         var name = '(' + name2 +')';
     }
-    var tweet = '【NEWS】『' + inputtitle + '』\n NEWSを更新しました。AppStoreよりNEWSアプリをダウンロードの上ご覧ください。' + name + '\n #ロスタイムズ情報局からのおしらせ ';
+    var tweet = '【更新通知】『' + inputtitle + '』\n 記事を更新しました、是非ご覧ください。' + name + '\n #ハッシュタグ ';
     // テキストエリアを作成し、内容を設定
     var textArea = document.createElement("textarea");
     textArea.value = tweet;
