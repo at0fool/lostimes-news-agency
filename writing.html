@@ -39,6 +39,14 @@
                         <p>タイトル</p>
                         <input type="text" id="input_title" name="title" placeholder="タイトルを入力">
                     </div>
+                    <div class="img_input">
+                        <p>サムネイル</p>
+                        <div class="img_input_area">
+                            <input type="text" id="imgurl" name="imgurl" placeholder="画像URL">
+                            <input type="button" value="画像プレビュー" onclick="preview_img()" class="btn tool_btn">
+                        </div>
+                    </div>
+                    <div id="img_preview"></div>
                     <div class="comment_input">
                         <p>本文<span>（文字数：<span id="input_count"></span>）</span></p>
                         <textarea id="input_teatarea" placeholder="本文を入力"></textarea>
@@ -59,6 +67,7 @@
                     <input type="button" value="日付" onclick="insert_data()" class="btn tool_btn">
                     <input type="button" value="横17" onclick="btn_17()" class="btn tool_btn" id="width_btn_a">
                     <input type="button" value="横def" onclick="btn_default()" class="btn tool_btn" id="width_btn_b" style="display:none">
+                    <input type="button" value="画像URLコピー" onclick="cp_img()" class="btn tool_btn" id="width_btn_b">
                     <input type="button" value="戻す" onclick="undo()" class="btn tool_btn">
                 </div>
                 <div class="output_btn_area">

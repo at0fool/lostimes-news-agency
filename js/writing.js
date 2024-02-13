@@ -5,11 +5,13 @@ window.onload = function() {
     var textarea = document.getElementById("input_teatarea");
     var name1 = document.getElementById("input_user_a");
     var name2 = document.getElementById("input_user_b");
+    var imgurl = document.getElementById("imgurl");
     // ローカルストレージから値を取得して表示
     var storedTitle = localStorage.getItem("savedTitle");
     var storedComment = localStorage.getItem("savedComment");
     var storedName1 = localStorage.getItem("savedName1");
     var storedName2 = localStorage.getItem("savedName2");
+    var storedImgUrl = localStorage.getItem("savedImgUrl");
     if (storedTitle) {
         title.value = storedTitle;
     }
@@ -21,6 +23,9 @@ window.onload = function() {
     }
     if (storedName2) {
         name2.value = storedName2;
+    }
+    if (storedImgUrl) {
+        imgurl.value = storedImgUrl;
     }
 }
 
@@ -185,6 +190,7 @@ function writing_save() {
     var commentInput = document.getElementById("input_teatarea");
     var name1 = document.getElementById("input_user_a").value;
     var name2 = document.getElementById("input_user_b").value;
+    var imgurl = document.getElementById("imgurl").value;
     var titleValue = titleInput.value.trimEnd();
     var commentValue = commentInput.value.trimEnd();
 
@@ -193,6 +199,7 @@ function writing_save() {
     localStorage.setItem("savedComment", commentValue);
     localStorage.setItem("savedName1", name1);
     localStorage.setItem("savedName2", name2);
+    localStorage.setItem("savedImgUrl", imgurl);
 
     // 「保存済み」にボタンの見た目を変更
     var saveButton = document.getElementById("save_btn");
@@ -219,6 +226,14 @@ function cp_contents() {
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
     alert("本文がコピーされました");
+}
+
+function cp_img() {
+    var inputElement = document.getElementById("imgurl");
+    inputElement.select();
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    alert("画像URLがコピーされました");
 }
 
 function copy_result_text(text) {
@@ -306,7 +321,7 @@ function cp_tweet() {
     }else if(name2){
         var name = '(' + name2 +')';
     }
-    var tweet = '【NEWS】『' + inputtitle + '』\n 記事の掲載を行いました。是非、NEWSアプリよりご覧ください。' + name + '\n #ロスタイムズ情報局からのおしらせ ';
+    var tweet = '【NEWS】『' + inputtitle + '』\n 記事の掲載を行いました。是非、NEWSアプリよりご覧ください。' + name + '\n #ロスタイムズ情報局 ';
     // テキストエリアを作成し、内容を設定
     var textArea = document.createElement("textarea");
     textArea.value = tweet;
@@ -325,3 +340,43 @@ function cp_tweet() {
 
     alert("ツイート文言がコピーされました");
 }
+
+function preview_img() {
+    var imgUrl = document.getElementById("imgurl").value;
+    var imgPreview = document.getElementById("img_preview");
+
+    var img = new Image();
+    img.src = imgUrl;
+    img.onload = function() {
+        imgPreview.innerHTML = "";
+        var imgContainer = document.createElement("div");
+        imgContainer.style.width = "100%";
+        imgContainer.style.height = "0";
+        imgContainer.style.paddingTop = "56.25%"; // 16:9のアスペクト比
+        imgContainer.style.position = "relative";
+        imgContainer.style.border = "solid 1px gray"
+
+        var imgElement = document.createElement("img");
+        imgElement.style.width = "100%";
+        imgElement.style.height = "100%";
+        imgElement.style.position = "absolute";
+        imgElement.style.top = "0";
+        imgElement.style.left = "0";
+        imgElement.src = img.src;
+
+        imgContainer.appendChild(imgElement);
+        imgPreview.appendChild(imgContainer);
+    };
+
+    img.onerror = function() {
+        imgPreview.innerHTML = "no_image";
+    };
+}
+
+document.getElementById("imgurl").addEventListener("keyup", function(event) {
+    // Enter キーが押された場合
+    if (event.keyCode === 13) {
+        event.preventDefault(); // デフォルトの動作をキャンセル
+        preview_img(); // preview_img() 関数を呼び出す
+    }
+});
