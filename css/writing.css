@@ -50,6 +50,22 @@ p,input,textarea{
     gap: 25px;
 }
 
+#img_preview{
+    width: 327px;
+    place-items: center;
+}
+
+#imgurl{
+    height: 30px;
+    padding: 0px 5px;
+    width: 100%;
+}
+
+.img_input_area{
+    display: flex;
+    gap: 5px;
+}
+
 .contents{
     width: 100%;
     max-width: 500px;
